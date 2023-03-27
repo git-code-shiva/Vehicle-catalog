@@ -11,14 +11,18 @@ const TableHeader=()=>{
         const fetchData = async()=>{
             const response = await axios.get('https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?ManufacturerType=Intermediate&format=json') 
             const data = response.data.Results;
-            // const v_type = data.VehicleTypes
+            // const parseData = JSON.parse(data);
+            // const vehicleType = data.VehicleTypes;
             setData(data);
-            // console.log(data)
-            // console.log(v_type)
+            console.log(data)
+
+        //    const vtype = data.map((item)=>item.VehicleTypes.map((type)=>type.Name));
+        //    console.log(vtype[1]);
+
             
         };
         fetchData();
-        console.log(finalData)
+        // console.log(finalData)
         
     },[search])
 
@@ -26,8 +30,8 @@ const TableHeader=()=>{
         if(filterOption === "All"){
             setFilterOption(finalData)
         }else{
-            const filter = finalData.filter(item=>item.type === filterOption)
-            setFilterOption(filterOption)
+            const filter = finalData.filter(item=>item.Name === filterOption)
+            setFilterOption(filter)
         }
     },[finalData,filterOption])
 
@@ -53,14 +57,10 @@ const TableHeader=()=>{
                     <div className="sort_div">
                     <b><span className="drop_down">Filter By Vehicle Type:</span></b>
                     <select value={filterOption} onChange={event =>setFilterOption(event.target.value)}>
-                        <option>All</option>
-                        <option>Passenger Car</option>
-                        <option>Truck</option>
-                        <option>Bike</option>
-                        <option>Trailer</option>
-                        <option>Bus</option>
-                        <option>Off Road Vehicle</option>
-                        <option>Low speed vehicle</option>
+                        <option value="All" >All</option>
+                        {finalData.map(item=> item.VehicleTypes.map(type=>(
+                            <option value={type.Name}>{type.Name}</option>
+                        )))}
                     </select>
                     </div>
                    
@@ -89,7 +89,7 @@ const TableHeader=()=>{
                         <div className="row">
                         <div className="table_name" key={idx}>{item.Mfr_Name}</div>
                         <div className="table_country">{item.Country}</div>
-                        <div className="table_type">Bus{item.Mfr_CommonName}{}{item.Mfr_ID}</div>
+                        <div className="table_type">{item.VehicleTypes.map((type)=>type.Name)}</div>
                         </div>
                         </>
                     ))}
