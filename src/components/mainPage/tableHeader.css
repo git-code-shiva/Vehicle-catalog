@@ -53,3 +53,52 @@
     flex: 2;
   }
   
+ .main_heading{
+  text-align: center;
+ }
+
+ .search_bar{
+  display: flex;
+  gap: 38rem;
+  padding-left: 5rem;
+ }
+
+ .popup_container{
+  position: fixed; /* make it fixed so it doesn't move when you scroll */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+
+ .popup_content {
+  background-color: #fff;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.popup_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup_header h2 {
+  margin: 0;
+}
+
+.popup_header button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
