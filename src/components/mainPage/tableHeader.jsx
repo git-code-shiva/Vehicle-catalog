@@ -19,9 +19,6 @@ const TableHeader = () => {
       // const vehicleType = data.VehicleTypes;
       setData(data);
       console.log(data);
-
-      //    const vtype = data.map((item)=>item.VehicleTypes.map((type)=>type.Name));
-      //    console.log(vtype[1]);
     };
     fetchData();
     // console.log(finalData)
@@ -39,13 +36,6 @@ const TableHeader = () => {
   const filteredItems = finalData.filter((item) =>
     item.Mfr_Name.toLowerCase().includes(search.toLowerCase())
   );
-
-  // useEffect(()=>{
-  //     const fetchType=async()=>{
-  //         const response = await axios.get('https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json')
-  //         const data = response.data.Results
-  //     }
-  // })
 
   const viewDetails = (rowData) => {
     setSelectedRowData(rowData);
@@ -70,6 +60,7 @@ const TableHeader = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by Name"
             />
           </div>
 
@@ -126,8 +117,10 @@ const TableHeader = () => {
         <div className="popup_container">
           <div className="popup_content">
             <div className="popup_header">
-              <h2>Manufacture Name:{" "}{selectedRowData.Mfr_Name}</h2>
-              <button onClick={closePopup}>X</button>
+              <button onClick={closePopup} className="close_btn">X</button>
+              <h2>Id:{" "}<span className="pop_details">{selectedRowData.Mfr_ID}</span></h2>
+              <h2>Manufacture Name:{" "}<span className="pop_details">{selectedRowData.Mfr_Name}</span></h2>
+              <h2>Country:{" "}<span className="pop_details">{selectedRowData.Country}</span></h2>
             </div>
           </div>
         </div>
